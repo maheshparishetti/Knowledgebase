@@ -1,0 +1,183 @@
+<div>
+    <div class="header" style="background-color: white">
+      <a  class="font-light m-b-xs titlename">Knowledge Base/Articles</a>
+      <div class="header-right">
+          <a class="dropdown-toggle "  style="color: #3498db;padding: 8px;font-size: 10pt;height:34px !important;font-weight: 600;border-right: 1px solid #f1f1f1;">
+            <i class="fa fa-group"></i> My Dashboard
+        </a>
+        <a class="dropdown-toggle "  style="color: #3498db;padding: 8px;font-size: 10pt;height:34px !important;font-weight: 600;border-right: 1px solid #f1f1f1;">
+          <i class="fa fa-group"></i> My Articles
+      </a>
+      <a class="dropdown-toggle "  style="color: #3498db;padding: 8px;font-size: 10pt;height:34px !important;font-weight: 600;border-right: 1px solid #f1f1f1;">
+        <i class="fa fa-group"></i> Add Articles
+    </a>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="first" class="col-md-12" style="background-color:rgba(246, 242, 242, 0.863);">
+            <div id="dvarticlecontainer" style="display: inline-block; vertical-align: top;border-right:1px solid grey;padding-top:20px">
+
+            <div id="allarticletabview">
+            <!-- <div class="container" *ngFor="let key of arr; let i=index">
+    <img src="{{key.image1}}" alt="Avatar" style="width:90px" >
+    <h3 class="mb-2">{{key.article_name}}</h3>
+    <span style="padding-right:20px;">{{key.published_date}}</span>
+    <span style="padding-right:20px;">{{key.published_time}}</span>
+    <span style="padding-right:20px;">{{key.created_by}}</span>
+    <p>{{key.description}}</p>
+    <span style="padding-right:20px;"><button class="btn btn-primary btn-xs">Read More</button></span>
+    <button class="btn btn-primary btn-xs" (click)="openEdit(content,i)" >Edit</button>
+    </div> -->
+    <div *ngFor="let item of arr;let i=index">
+        <div class="container" *ngIf="item.isAdmin;else falseblock">
+          <img src='{{item.image1}}' alt="Avatar" style="width:90px">
+          <h3 class="mb-2">{{item.article_name}}</h3>
+          <span style="padding-right:20px;">{{item.published_date}} {{item.published_time}}</span>
+          <span style="padding-right:20px;">{{category}}</span>
+          <span style="padding-right:20px;">{{created_by}}</span>
+          <p>{{description}}</p>
+          <span style="padding-right:20px;"><button class="firstbut" class="btn btn-primary btn-xs">Read More</button></span>
+        </div>
+        <ng-template #falseblock>
+            <div class="container">
+                <img src='{{item.image1}}' alt="Avatar" style="width:90px">
+                <h3 class="mb-2">{{item.article_name}}</h3>
+                <span style="padding-right:20px;">{{item.published_date}} {{item.published_time}}</span>
+                <span style="padding-right:20px;">{{category}}</span>
+                <span style="padding-right:20px;">{{created_by}}</span>
+                <p>{{description}}</p>
+                <span style="padding-right:20px;">&nbsp;<button  class="btn btn-primary btn-xs">Read More</button>
+                  <button class="btn btn-primary btn-xs"  (click)="openEdit(content,i)">Edit</button>
+                </span>
+              </div>
+        </ng-template>
+      </div>
+    </div>
+
+    </div>
+    <div id="dvarticlecontainer" style="display: inline-block; vertical-align: top;padding-top:20px">
+            <div style="display: inline-block; vertical-align: top;padding-top:30px; padding-left:10px">
+                    <div id="dvSearch">
+                        <div style="font-size:medium">
+                            <label>Search&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+
+                            <label class="right">My Article<input type="checkbox" id="checkboxmyarticle"></label>
+                        </div>
+                        <input type="text" id="txtbxsearch" style="width: 70%;height: 35px;" placeholder=" Article Name / Description">
+                        <button class="right" id="btnsrh" data-get-url="/KB/GetKBArticles" data-updatecontainer="#dvarticlecontainer" class="btn btn-primary"><b>Search</b></button>
+                        <hr style="border: 1px solid #d4cfc3;">
+                        <h3 style="margin-top:30px;">Categories</h3>
+                        <ul style="list-style: none;padding-left: 0px;width: 100%;">
+
+                            <li style="border-bottom: 1px solid #cecece;padding:7px;">
+                                <a style="color:gray;font-size:14px;" data-get-url="/KB/GetKBArticles?getall=0" href="#" class="categoryshowall" data-updatecontainer="#dvarticlecontainer" data-categoryid="0">Show All</a>
+                            </li>
+
+                                <li style="border-bottom: 1px solid #cecece;padding:7px;" id="categoryli">
+                                    <a style="color:gray;font-size:14px;" data-get-url="/KB/GetKBArticles" href="#" class="categserh" data-updatecontainer="#dvarticlecontainer" data-categoryid="1">Accounts Recivables - Collections</a><input type="checkbox" class="catFilter" data-categoryid="1" style="display:none">
+
+                                </li>
+                                <li style="border-bottom: 1px solid #cecece;padding:7px;" id="categoryli">
+                                    <a style="color:gray;font-size:14px;" data-get-url="/KB/GetKBArticles" href="#" class="categserh" data-updatecontainer="#dvarticlecontainer" data-categoryid="3">Office - Practice Management</a><input type="checkbox" class="catFilter" data-categoryid="3" style="display:none">
+
+                                </li>
+                                <li style="border-bottom: 1px solid #cecece;padding:7px;" id="categoryli">
+                                    <a style="color:gray;font-size:14px;" data-get-url="/KB/GetKBArticles" href="#" class="categserh" data-updatecontainer="#dvarticlecontainer" data-categoryid="2">Surgical Authorizations &amp; Verifications</a><input type="checkbox" class="catFilter" data-categoryid="2" style="display:none">
+
+                                </li>
+                        </ul>
+
+                    </div></div>
+        </div>
+
+
+  </div>
+
+
+</div>
+
+</div>
+<!-- article_id:string;
+  article_name:string;
+  published_date:string;
+  published_time:string;
+  category:string;
+  created_by:string;
+  description:string;
+  image1:string;
+  image2:string; -->
+<ng-template #content let-modal>
+    <h1 class="center">Edit Article</h1>
+    <form [formGroup]="kbase" (ngSubmit)="UpdateItem()">
+    <div class="container">
+    <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+    <label><b>Task ID</b></label>
+    <input formControlName="article_id"   type="text" class="form-control" placeholder="enter name of organisation">
+    </div>
+    <div class="col-xs-6 col-sm-4">
+    <label><b>Due_date</b></label>
+    <input formControlName="article_name"   type="text" class="form-control" placeholder="enter address of organisation">
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-xs-6 col-md-4">
+    <label><b>Title</b></label>
+    <input formControlName="published_date" class="T" type="text" class="form-control" placeholder="enter description of organisation">
+    </div><br/>
+    </div>
+    <div class="row">
+    <div class="col-xs-6 col-sm-4">
+    <label><b>Desc</b></label>
+    <input formControlName="published_time"   type="text" class="form-control" placeholder="enter address of organisation">
+    </div></div>
+    <div class="row">
+    <div class="clearfix visible-xs-block"></div>
+    <div class="col-xs-6 col-sm-4">
+    <label><b>Priority</b></label>
+    <input formControlName="category"   type="text" class="form-control" placeholder="enter city of organisation">
+    </div>
+    <div class="col-xs-6 col-sm-4">
+    <label><b>Assigned_to</b></label>
+    <input formControlName="created_by"  type="text" class="form-control" placeholder="enter state of organisation">
+    </div>
+    </div>
+    <div class="row">
+    <div class="clearfix visible-xs-block"></div>
+    <div class="col-xs-6 col-sm-4">
+    <label><b>Comments</b></label>
+    <input formControlName="description"  type="text" class="form-control" placeholder="enter country of organisation">
+    </div>
+    </div>
+    <div class="row">
+        <div class="clearfix visible-xs-block"></div>
+        <div class="col-xs-6 col-sm-4">
+        <label><b>Comments</b></label>
+        <input formControlName="image1"  type="text" class="form-control" placeholder="enter country of organisation">
+        </div>
+        </div>
+        <div class="row">
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-xs-6 col-sm-4">
+            <label><b>Comments</b></label>
+            <input formControlName="image2"  type="text" class="form-control" placeholder="enter country of organisation">
+            </div>
+            </div>
+    <div class="container">
+    <div class="row custom-wrapper">
+    <div class="col-md-12">
+    <button type="submit"  class="btn btn-primary btn-sm-2 text-white">Submit</button>&nbsp;&nbsp;
+    <button type="button" class="btn btn-danger btn-sm-2 text-white" aria-label="Close" (click)="modal.dismiss('Cross click')">Cancel</button> <br/>
+    </div>
+    </div>
+    </div>
+    <br/>
+    </div>
+    </form>
+    </ng-template>
